@@ -11,7 +11,17 @@ class Unit
   end
 
   def attack!(enemy)
-    enemy.damage(@attack_power)
+    return nil if dead? or enemy.dead?
+    if enemy.class == Barracks
+      enemy.damage((@attack_power/2).ceil)
+    else
+      enemy.damage(@attack_power)
+    end
+
+  end
+
+  def dead?
+    @health_points <= 0
   end
 
 end
